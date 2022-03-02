@@ -1,6 +1,6 @@
 # STARFORGE_sink_analysis
 Scripts to analyze sink particle (i.e., star) data in the [STARFORGE simulations](http://starforge.space/).
-See examples.py for some working examples with the provided STARFORGE outputs from a small (M = 200 Msun, R = 1pc ) run with all physics enabled.
+See `examples.py` for some working examples with the provided STARFORGE outputs from a small (M = 200 Msun, R = 1pc ) run with all physics enabled.
 You can get more STARFORGE star data from [this repository](https://github.com/mikegrudic/StarforgeFullPhysics).
 
 ## Installation
@@ -30,5 +30,12 @@ where `sink_ID` is the unique particle ID of the star you are interested in, `ru
 The scrip returns `sink_evol`, `sink_formation_history`, `accretion_history`, which are dictionaries containing the evolution of stellar properties (in each snapshot), at formation properties and accretion history for the star `with sink_ID`.
 
 ### Evolution of global stellar properties
-
+We can use `model_comparison` to create a set of plots that show the evolution of various star formation metrics (i.e., star formation rate/efficiency, mean/median/weighted-median stellar mass, effective IMF slope) and the initial mass function. 
+```
+from starforge_IMF_scripts import model_comparison
+filenames = ['filename1', 'filename2'] #filenames of sink_data files, created with get_sink_data.get_sink_data_in_files
+runnames = [r'$M = 2\times 10^2\,M_\mathrm{\odot}$, $N = 2\times 10^6$'] #labels in the plots for each run
+model_comparison(filenames, data_folder='folder_for_files', modelnames=runnames)
+```
+Note that model_comparison has a lot of optional parameters that can be used to adjust the figures, for a basic call see `examples.py`.
 
