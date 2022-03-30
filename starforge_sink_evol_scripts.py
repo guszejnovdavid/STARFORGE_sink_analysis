@@ -199,6 +199,9 @@ def get_single_sink_evol(sink_ID, run_folder=None, save_to_folder=None,sink_data
         snapfiles = glob.glob(run_folder+"/snapshot_*[0-9]"+snap_name_addition+".hdf5")  
         print("Reading sink data from %d snapshots"%(len(snapfiles)))
         snap_data_list = get_sink_data.get_sink_data_in_files(snapfiles,outfolder=save_to_folder,outfilename=sink_data_filename,suppress_output=True,snap_name_addition=snap_name_addition )
+    #Sort by time 
+    snaptimes = [snapdata.t for snapdata in snap_data_list]
+    snap_data_list = np.array(snap_data_list)[np.argsort(snaptimes)]
     #Init for results
     sink_evol = {}
     #Lets find the sink in each snapshot and get its properties
