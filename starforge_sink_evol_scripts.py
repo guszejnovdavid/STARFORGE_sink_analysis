@@ -152,6 +152,10 @@ def list_sinks_in_snapshot(snapshot_file):
     m = np.array(F["PartType5/Masses"],dtype=np.float64)
     x = np.array(F["PartType5/Coordinates"],dtype=np.float64)
     v = np.array(F["PartType5/Velocities"],dtype=np.float64)
+    #sort by mass
+    sortind = np.argsort(m)
+    ids = ids[sortind]; m = m[sortind];
+    x = x[sortind]; v = v[sortind];
     for i in range(len(ids)):
         print("ID: %d m: %g x: [%g,%g,%g]  v: [%g,%g,%g]"%(ids[i],m[i],x[i,0],x[i,1],x[i,2],v[i,0],v[i,1],v[i,2]))
 
